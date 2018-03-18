@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+         
+        <script src="hankins.js"></script>
+
+<!-- 
+        <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+-->
+        <link rel="stylesheet" href="hankins.css">
+
+
+        <title>Hankins Family</title>
+
+    </head>
+
+<!-- 
+-->
+
+    <body onload="initializeFirebaseBible()">
+
+        <h1>Hankins Family</h1>
+
+        <div style="color: blue">
+            <script> document.write(new Date().toDateString()); </script> 
+        </div>
+
+        <br>
+
+        <div id="passage">
+
+            <select id="book" style="width: 130px">
+                <option value="Select Book"> --- Select Book --- </option>
+                <option value="1Thessalonians">1 Thessalonians</option>
+                <option value="2Thessalonians">2 Thessalonians</option>
+                <option value="book">book</option>
+                <option value="book">book</option>
+            </select>
+
+            <input type="number" id="chapterStart" style="width: 55px">
+            :
+            <input type="number" id="verseStart" style="width: 55px">
+
+            <br> <span style="margin-left: 110px; margin-top: 5px"> To: </span>
+            
+            <input type="number" id="chapterEnd" style="width: 55px; margin-top: 5px">
+            :
+            <input type="number" id="verseEnd" style="width: 55px; margin-top: 5px">
+            
+            <br>
+            
+            <input type="button" class="submitButton" name="getPassageButton" value="Get Passage Text" onclick="getPassage();">
+            
+        </div>
+
+        <div id="KJV">
+            <br>
+            Passage goes here!
+            <br>
+
+        </div>
+
+        <div id="KJV2" class="hideDIV">
+            <br>
+            <iframe src="https://www.biblegateway.com/passage/?search=2 Timothy+2%3A12-17&version=KJV&interface=print" height="200" width="80%"></iframe>
+
+        </div>
+
+<!--
+        <div id="otherVersionSelect">
+            
+        </div>
+
+        <div id="otherVersionText">
+        
+        </div>
+-->
+
+        <div id="thoughts">
+            <br>
+            Thoughts:
+            <br>
+            <input type="text" name="thoughts" style="width: 80%; margin-top: 5px; height: 100px" placeholder="Enter your thoughts about the passage here. ">
+
+            
+        </div>
+
+        <div id="prayer">
+            <br>
+            Prayer:
+            <br>
+            <input type="text" name="prayer" style="width: 80%; margin-top: 5px; height: 100px" placeholder="Enter your prayer here. ">            
+        </div>
+
+        <br>
+            
+        <input type="button" class="submitButton" name="submitPage" value="Submit" onclick="submitPage();">
+
+
+    </body>
+</html>
