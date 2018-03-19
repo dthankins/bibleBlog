@@ -159,6 +159,8 @@ function getPassage(){
     var link;
 
 /*
+document.getElementById("KJV").innerHTML = "bible text goes here";
+*/ 
     link = "https://www.biblegateway.com/passage/?search=" + book + "+" + chapterStart + "%3A" + verseStart + "-" + verseEnd + "&version=KJV;NIV&interface=print";
 
 
@@ -173,7 +175,7 @@ function getPassage(){
         unHide("KJV2");
 
     }
-*/ document.getElementById("KJV").innerHTML = "bible text goes here";
+
 
 }
 
