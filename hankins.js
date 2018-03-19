@@ -4,9 +4,82 @@
 
 */
 
+function initializeFirebaseMRA() {
+
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAFA7QAna_kcPdGTQ2R4bzH0F4_zROg6NI",
+        authDomain: "hankinsfamily-3c92b.firebaseapp.com",
+        databaseURL: "https://hankinsfamily-3c92b.firebaseio.com",
+        projectId: "hankinsfamily-3c92b",
+        storageBucket: "",
+        messagingSenderId: "400051819535"
+      };
+      firebase.initializeApp(config);
+
+      //test to see it is working  it never acts like it is working   console.log(firebase);
 
 
+
+    // Reference to the protocols object in your Firebase database
+    var newProtocols = firebase.database().ref("newProtocols");
+
+
+   window.alert("in first part");
+
+}
+
+function submitNewProtocol() {
+
+    // Save a new protocol to the database, using the input in the form
+    // var submitNewProtocol = function () {
+
+        window.alert("in 2nd part");
+      
+
+    // Get input values from each of the form elements
+    var date = new Date().toDateString();
+
+    var node = document.getElementById("KJV");
+    var htmlContent = node.innerHTML;
+    // var passageTextDiv=htmlContent;
+    var passageTextDiv="some text here";
+
+    var thoughts = document.getElementsByName("thoughts")[0].value;
+    var prayer = document.getElementsByName("prayer")[0].value;
+
+
+    window.alert(
+        date + '\n' +
+        passageTextDiv + '\n' +
+        thoughts + '\n' +
+        prayer);
+      
+        var date = js_date;
+        var passageTextDiv = js_passageTextDiv;
+        var thoughts = js_thou;ghts
+        var prayer = js_prayer;
+
+
+    // Push a new protocol to the database using those values
+        newProtocols.push({
+
+        "date": js_date, 
+        "passageTextDiv": js_passageTextDiv, 
+        "thoughts": js_thoughts,
+        "prayer": js_prayer
+
+        });
+      
+
+} // end initializeFirebaseMRA()
+
+
+
+
+/*
 function initializeFirebaseBible() {
+
 
 
   // Initialize Firebase
@@ -15,14 +88,66 @@ function initializeFirebaseBible() {
     authDomain: "bibleblog-1bd60.firebaseapp.com",
     databaseURL: "https://bibleblog-1bd60.firebaseio.com",
     projectId: "bibleblog-1bd60",
-    storageBucket: "",
+    storageBucket: "bibleblog-1bd60.appspot.com",
     messagingSenderId: "49437803895"
   };
-
   firebase.initializeApp(config);
 
 
+    // Save a new protocol to the database, using the input in the form
+   
+
+
+    var newBiblePost = firebase.database().ref("newBiblePost"); 
 }
+
+
+
+function submitPage() {
+
+    // Save a new protocol to the database, using the input in the form
+    // var submitNewPost = function () {
+
+
+
+    // Get input values from each of the form elements
+
+    var date = new Date().toDateString();
+
+    var node = document.getElementById("KJV");
+    var htmlContent = node.innerHTML;
+    // var passageTextDiv=htmlContent;
+    var passageTextDiv="some text here";
+
+    var thoughts = document.getElementsByName("thoughts")[0].value;
+    var prayer = document.getElementsByName("prayer")[0].value;
+
+
+    window.alert(
+        date + '\n' +
+        passageTextDiv + '\n' +
+        thoughts + '\n' +
+        prayer);
+
+
+
+
+    // Push a new protocol to the database using those values
+    newBiblePost.push({
+        "date": date, 
+        "passageTextDiv": passageTextDiv, 
+        "thoughts": thoughts,
+        "prayer": prayer
+    });
+} 
+
+*/
+
+
+
+
+
+
 
 function getPassage(){
     var book = document.getElementById("book").value;
@@ -33,6 +158,7 @@ function getPassage(){
 
     var link;
 
+/*
     link = "https://www.biblegateway.com/passage/?search=" + book + "+" + chapterStart + "%3A" + verseStart + "-" + verseEnd + "&version=KJV;NIV&interface=print";
 
 
@@ -47,22 +173,11 @@ function getPassage(){
         unHide("KJV2");
 
     }
-    
-}
-
-function submitPage() {
-
-    var node = document.getElementById("KJV");
-    var htmlContent = node.innerHTML;
-    var passageTextDiv=htmlContent;
-
-    var thoughts = document.getElementsByName[0]("thoughts").value;
-    var prayer = document.getElementsByName[0]("prayer").value;
-
-    
-
+*/ document.getElementById("KJV").innerHTML = "bible text goes here";
 
 }
+
+
 
 function hide(hiddenDIV){
   var element = document.getElementById(hiddenDIV);
