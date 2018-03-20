@@ -5,7 +5,7 @@
         
         <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>       
         
-        <script src="hankins.js"></script>
+        <script src="hankins3.js"></script>
 <!--
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 -->
@@ -52,7 +52,7 @@
                 
                 <br>
                 
-                <input type="button" class="submitButton" name="getPassageButton" value="Get Passage Text" onclick="getPassage();">
+                <input type="button" class="submitButton" name="getPassageButton" value="Get Passage Text" onclick="getPassage();"> 
                 
             </div>
 
@@ -96,8 +96,17 @@
             </div>
 
             <br>
-                
-            <input type="submit" class="submitButton" name="submitPage" value="Submit" onclick="initializeFirebaseMRA();submitNewProtocol()">
+
+            <input type="button" class="submitButton" name="setup" value="Setup" onclick="setupFirebase();">
+      
+            <input type="submit" class="submitButton" name="send" value="Send Data" onclick="sendToFirebase();">
+
+
+
+
+
+            
+
 
         </form>
 

@@ -1,151 +1,87 @@
+// GLOBAL VARIABLES -- outside of a function so runs on page load and available to all functions.
 
-/*
+// Get input from user
+
+// var fruitInput;
+// var totalInput;
+
+var date;
+var passageTextDiv;
+var thoughts;
+var prayer;
 
 
-*/
+var database;
 
-function initializeFirebaseMRA() {
 
-      // Initialize Firebase
-      var config = {
+function setupFirebase() { // add to onload body elemant
+
+    var config = {
         apiKey: "AIzaSyAFA7QAna_kcPdGTQ2R4bzH0F4_zROg6NI",
         authDomain: "hankinsfamily-3c92b.firebaseapp.com",
         databaseURL: "https://hankinsfamily-3c92b.firebaseio.com",
         projectId: "hankinsfamily-3c92b",
-        storageBucket: "",
+        storageBucket: "hankinsfamily-3c92b.appspot.com",
         messagingSenderId: "400051819535"
-      };
-      firebase.initializeApp(config);
+    };
 
-      //test to see it is working  it never acts like it is working   console.log(firebase);
-
+    firebase.initializeApp(config);
 
 
-    // Reference to the protocols object in your Firebase database
-    var newProtocols = firebase.database().ref("newProtocols");
+    database = firebase.database();
 
-
-   window.alert("in first part");
-
-}
-
-function submitNewProtocol() {
-
-    // Save a new protocol to the database, using the input in the form
-    // var submitNewProtocol = function () {
-
-        window.alert("in 2nd part");
-      
-
-    // Get input values from each of the form elements
-    var date = new Date().toDateString();
+    // Input fields
+    date = new Date().toDateString();
 
     var node = document.getElementById("KJV");
     var htmlContent = node.innerHTML;
-    // var passageTextDiv=htmlContent;
-    var passageTextDiv="some text here";
+    passageTextDiv=htmlContent;
+    // passageTextDiv="some text here";
 
-    var thoughts = document.getElementsByName("thoughts")[0].value;
-    var prayer = document.getElementsByName("prayer")[0].value;
-
-
-    window.alert(
-        date + '\n' +
-        passageTextDiv + '\n' +
-        thoughts + '\n' +
-        prayer);
-      
-        var date = js_date;
-        var passageTextDiv = js_passageTextDiv;
-        var thoughts = js_thou;ghts
-        var prayer = js_prayer;
+    thoughts = document.getElementsByName("thoughts")[0].value;
+    prayer = document.getElementsByName("prayer")[0].value;
 
 
-    // Push a new protocol to the database using those values
-        newProtocols.push({
+  // fruitInput = "banana";
+  // totalInput = 7;
 
-        "date": js_date, 
-        "passageTextDiv": js_passageTextDiv, 
-        "thoughts": js_thoughts,
-        "prayer": js_prayer
-
-        });
-      
-
-} // end initializeFirebaseMRA()
-
-
-
-
-/*
-function initializeFirebaseBible() {
-
-
-
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCUnMXZnBaU5Q9M1T0ddZrrCXEw8q8TmN0",
-    authDomain: "bibleblog-1bd60.firebaseapp.com",
-    databaseURL: "https://bibleblog-1bd60.firebaseio.com",
-    projectId: "bibleblog-1bd60",
-    storageBucket: "bibleblog-1bd60.appspot.com",
-    messagingSenderId: "49437803895"
-  };
-  firebase.initializeApp(config);
-
-
-    // Save a new protocol to the database, using the input in the form
-   
-
-
-    var newBiblePost = firebase.database().ref("newBiblePost"); 
 }
 
 
+// This is a function for sending data
+function sendToFirebase() {
+    var blogPosts = database.ref('blogPosts'); // pleural
 
-function submitPage() {
+  // Make an object with data in it
+    var data = {
+        date: date, 
+        passageTextDiv: passageTextDiv, 
+        thoughts: thoughts,
+        prayer: prayer
+    }
 
-    // Save a new protocol to the database, using the input in the form
-    // var submitNewPost = function () {
+    var blogPost = blogPosts.push(data, finished); // singular then pleural
+    console.log("Firebase generated key: " + blogPost.key); // singular
 
-
-
-    // Get input values from each of the form elements
-
-    var date = new Date().toDateString();
-
-    var node = document.getElementById("KJV");
-    var htmlContent = node.innerHTML;
-    // var passageTextDiv=htmlContent;
-    var passageTextDiv="some text here";
-
-    var thoughts = document.getElementsByName("thoughts")[0].value;
-    var prayer = document.getElementsByName("prayer")[0].value;
-
-
-    window.alert(
-        date + '\n' +
-        passageTextDiv + '\n' +
-        thoughts + '\n' +
-        prayer);
-
-
-
-
-    // Push a new protocol to the database using those values
-    newBiblePost.push({
-        "date": date, 
-        "passageTextDiv": passageTextDiv, 
-        "thoughts": thoughts,
-        "prayer": prayer
-    });
-} 
-
-*/
-
-
-
-
+    // Reload the data for the page
+    function finished(err) {
+        if (err) {
+          console.log("ooops, something went wrong.");
+          console.log(err);
+        } else {
+            console.log('Data saved successfully');
+            /*
+            // clear the fields
+            passageTextDiv="";
+            document.getElementById("KJV")="";
+            thoughts = "";
+            document.getElementsByName("thoughts")[0].value="";
+            prayer = ""
+            document.getElementsByName("prayer")[0].value="";
+            */
+        }
+    }
+}
 
 
 
@@ -158,14 +94,7 @@ function getPassage(){
 
     var link;
 
-/*
-document.getElementById("KJV").innerHTML = "bible text goes here";
-*/ 
     link = "https://www.biblegateway.com/passage/?search=" + book + "+" + chapterStart + "%3A" + verseStart + "-" + verseEnd + "&version=KJV;NIV&interface=print";
-
-
-
-
 
     if(chapterEnd===chapterStart){ // all verses in same chapter
         
@@ -173,12 +102,8 @@ document.getElementById("KJV").innerHTML = "bible text goes here";
 
     } else {
         unHide("KJV2");
-
     }
-
-
 }
-
 
 
 function hide(hiddenDIV){
@@ -191,41 +116,77 @@ function unHide(hiddenDIV){
   element.classList.remove("hideDIV");        //toggle class hideDIV
 }
 
-function addData(newBlogPost,stringDivId){
-    var node = document.getElementById(stringDivId);
 
-    var htmlContent = node.innerHTML;
 
-    document.getElementById(stringDivId).innerHTML = htmlContent + "<br>" + newBlogPost;
+
+
+/*
+// DISPLAY on index page below here
+
+function initializeFirebase() {
+
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAFA7QAna_kcPdGTQ2R4bzH0F4_zROg6NI",
+        authDomain: "hankinsfamily-3c92b.firebaseapp.com",
+        databaseURL: "https://hankinsfamily-3c92b.firebaseio.com",
+        projectId: "hankinsfamily-3c92b",
+        storageBucket: "hankinsfamily-3c92b.appspot.com",
+        messagingSenderId: "400051819535"
+    };
+      
+    firebase.initializeApp(config);
+
 
 }
 
 
 function readData() {
-    
-   
+       
     // Load database
-    var database = firebase.database();
+    database = firebase.database();
 
     // Load scores/bob
  
-    var ref = database.ref('bibleBlog');
-    ref.on('value', outputData); 
+    var ref = database.ref('blogPosts');
+    ref.once('value', outputData); 
 
 }
 
 
 function outputData(data) {
-
-    // location.reload();
-
-    // refreshLists();
-    // refreshLists only works for masterWOrklist.  It just deletes everything on the others
    
-    realdata = data.val(); 
+    var realdata = data.val(); 
     var keys = Object.keys(data.val());
     for (i = 0; i < keys.length; i++){
+
+
+        var newDate = realdata[keys[i]].date;
+        var newPassage = realdata[keys[i]].passageTextToDiv;
+        var newThought = realdata[keys[i]].thoughts;
+        var newPrayer = realdata[keys[i]].prayer;
+
+        var newPost = 
+            date + '\n' + '\n' +
+            passageTextDiv + '\n' + '\n' +
+            thoughts + '\n' + '\n' +
+            prayer;        
+
+        addData(newPost,'blog'); 
         
     }
-       
+        
 }
+
+
+function addData(newBlogPost,stringDivId){
+    var node = document.getElementById(stringDivId);
+
+    var htmlContent = node.innerHTML;
+
+    document.getElementById(stringDivId).innerHTML = "<hr>" + htmlContent + "<br>" + newBlogPost;
+
+}
+
+*/
