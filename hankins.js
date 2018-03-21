@@ -70,18 +70,11 @@ function sendToFirebase() {
           console.log(err);
         } else {
             console.log('Data saved successfully');
-            /*
-            // clear the fields
-            passageTextDiv="";
-            document.getElementById("KJV")="";
-            thoughts = "";
-            document.getElementsByName("thoughts")[0].value="";
-            prayer = ""
-            document.getElementsByName("prayer")[0].value="";
-            */
+
         }
     }
 }
+
 
 
 
@@ -94,15 +87,13 @@ function getPassage(){
 
     var link;
 
-    link = "https://www.biblegateway.com/passage/?search=" + book + "+" + chapterStart + "%3A" + verseStart + "-" + verseEnd + "&version=KJV;NIV&interface=print";
+    link = "https://www.biblegateway.com/passage/?search=" + book + "+" + chapterStart + "%3A" + verseStart + "+-+" + chapterEnd + "%3A" + verseEnd + "&version=KJV;NIV&interface=print";
 
-    if(chapterEnd===chapterStart){ // all verses in same chapter
-        
-        document.getElementById("KJV").innerHTML = "<iframe src=" + link + " height='500' width='80%'></iframe>";
+    window.alert(link);
+ // link = "https://www.biblegateway.com/passage/?search=" + book + "+" + chapterStart + "%3A" + verseStart + "-" + verseEnd + "&version=KJV;NIV&interface=print";
 
-    } else {
-        unHide("KJV2");
-    }
+    document.getElementById("KJV").innerHTML = "<iframe src=" + link + " height='500' width='80%'></iframe>";
+
 }
 
 
